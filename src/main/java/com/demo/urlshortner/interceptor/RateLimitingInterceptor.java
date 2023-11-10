@@ -13,6 +13,10 @@ import javax.servlet.http.HttpServletRequest;
 
 import jakarta.servlet.http.HttpServletResponse;
 
+/**
+ * Interceptor for rate limiting.
+ * This interceptor checks if a user has exceeded their request limit before proceeding with the request.
+ */
 @Component
 public class RateLimitingInterceptor implements HandlerInterceptor {
 
@@ -31,9 +35,14 @@ public class RateLimitingInterceptor implements HandlerInterceptor {
     return true;
   }
 
-  // Method to extract user ID from the request
+  /**
+   * Utility method to extract the user ID from the request.
+   *
+   * @param request The incoming HTTP request.
+   * @return Long The extracted user ID.
+   */
   private Long extractUserIdFromRequest(HttpServletRequest request) {
-    // Extract and return the user ID
+    // Extract and return the user ID(hardcoded for now)
     long userId = 1;
     return userId;
   }

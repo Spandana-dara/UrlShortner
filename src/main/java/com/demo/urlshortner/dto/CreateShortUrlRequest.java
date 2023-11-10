@@ -1,10 +1,14 @@
 package com.demo.urlshortner.dto;
 
+
+/**
+ * Data Transfer Object (DTO) for creating a short URL request.
+ * This class is used to encapsulate the data received in a request to create a new short URL.
+ */
 public class CreateShortUrlRequest {
   private String longUrl;
   private Long userId;
 
-  // Standard getters and setters
   public String getLongUrl() {
     return longUrl;
   }

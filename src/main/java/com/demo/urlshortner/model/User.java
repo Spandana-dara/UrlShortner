@@ -1,12 +1,21 @@
 package com.demo.urlshortner.model;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 
+/**
+ * Entity class representing the User.
+ */
 @Entity
 public class User {
 
@@ -18,6 +27,9 @@ public class User {
 
   @Enumerated(EnumType.STRING)
   private Tier tier;
+
+  @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+  private Set<UrlMapping> urlMappings = new HashSet<>();
 
   private int requestCount;
 

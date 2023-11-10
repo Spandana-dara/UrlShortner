@@ -2,11 +2,17 @@ package com.demo.urlshortner.model;
 
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
+/**
+ * Entity class representing the URL mapping.
+ * This class maps shortened URLs to their corresponding original (long) URLs and associates them with a user.
+ */
 @Entity
 public class UrlMapping {
 
@@ -17,8 +23,19 @@ public class UrlMapping {
   private String longUrl;
   private String shortUrl;
 
-  @ManyToOne
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "user_id")
   private User user;
+
+  public UrlMapping() {
+
+  }
+
+  public UrlMapping(String longUrl, String shortUrl, User user) {
+    this.longUrl = longUrl;
+    this.shortUrl = shortUrl;
+    this.user = user;
+  }
 
   public Long getId() {
     return id;
@@ -49,16 +66,6 @@ public class UrlMapping {
   }
 
   public void setUser(User user) {
-    this.user = user;
-  }
-
-  public UrlMapping(){
-
-  }
-
-  public UrlMapping(String longUrl, String shortUrl, User user) {
-    this.longUrl = longUrl;
-    this.shortUrl = shortUrl;
     this.user = user;
   }
 
